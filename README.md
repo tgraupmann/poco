@@ -101,11 +101,11 @@ Visual Studio Strings:
 
 * Set `BUILD_SHARED_LIBS` to `OFF` to build static libs
 
-![cmake_gui.png](cmake_gui.png)
+![static_libs.png](static_libs.png)
 
 * Set `ENABLE_NETSSL_WIN` to `ON` to enable HTTPS protocol
 
-![static_libs.png](static_libs.png)
+![cmake_gui.png](cmake_gui.png)
 
 ```
 git clone -b master https://github.com/pocoproject/poco.git
