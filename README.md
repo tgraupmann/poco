@@ -89,6 +89,38 @@ $ cmake ..
 $ cmake --build . --config Release
 ```
 
+**Windows**
+
+Visual Studio Strings:
+
+* "Visual Studio 14 2015"
+* "Visual Studio 15 2017"
+* "Visual Studio 16 2019"
+
+**`cmake-gui`**
+![cmake_gui.png](cmake_gui.png)
+
+```
+git clone -b master https://github.com/pocoproject/poco.git
+cd poco
+REM 32-bit x86 static libs:
+cmake -G "Visual Studio 14 2015" -A Win32 -S . -B "build32"
+REM 64-bit x64 static libs:
+cmake -G "Visual Studio 14 2015" -A x64 -S . -B "build64"
+cd build32
+REM Enable NETSSL_WIN configure generate then close
+cmake-gui ..
+cmake --build . --config Debug
+cmake --build . --config Release
+cd ..
+cd build64
+REM Enable NETSSL_WIN configure generate then close
+cmake-gui ..
+cmake --build . --config Debug
+cmake --build . --config Release
+cd ..
+```
+
 On macOS, it's necessary to tell CMake where to find the OpenSSL headers
 and libraries by setting the `OPENSSL_ROOT_DIR` CMake variable.
 For example, if OpenSSL has been installed with Homebrew,
