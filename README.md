@@ -105,7 +105,7 @@ Visual Studio Strings:
 
 * Set `ENABLE_NETSSL_WIN` to `ON` to enable HTTPS protocol
 
-![static_libs.png](cmake_gui.png)
+![static_libs.png](static_libs.png)
 
 ```
 git clone -b master https://github.com/pocoproject/poco.git
