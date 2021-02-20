@@ -98,14 +98,21 @@ Visual Studio Strings:
 * "Visual Studio 16 2019"
 
 **`cmake-gui`**
+
+* Set `BUILD_SHARED_LIBS` to `OFF` to build static libs
+
 ![cmake_gui.png](cmake_gui.png)
+
+* Set `ENABLE_NETSSL_WIN` to `ON` to enable HTTPS protocol
+
+![static_libs.png](cmake_gui.png)
 
 ```
 git clone -b master https://github.com/pocoproject/poco.git
 cd poco
-REM 32-bit x86 static libs:
+REM 32-bit x86 libs:
 cmake -G "Visual Studio 14 2015" -A Win32 -S . -B "build32"
-REM 64-bit x64 static libs:
+REM 64-bit x64 libs:
 cmake -G "Visual Studio 14 2015" -A x64 -S . -B "build64"
 cd build32
 REM Enable NETSSL_WIN configure generate then close
