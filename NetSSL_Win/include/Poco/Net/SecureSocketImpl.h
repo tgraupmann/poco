@@ -28,6 +28,7 @@
 #include <windows.h>
 #include <wincrypt.h>
 #include <schannel.h>
+#include <mutex>
 #ifndef SECURITY_WIN32
 #define SECURITY_WIN32
 #endif
@@ -260,6 +261,8 @@ private:
 
 	friend class SecureStreamSocketImpl;
 	friend class StateMachine;
+
+	std::mutex _mutexPeerCertificate;
 };
 
 

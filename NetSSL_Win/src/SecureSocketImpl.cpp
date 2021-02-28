@@ -155,10 +155,13 @@ void SecureSocketImpl::cleanup()
 		_pOwnCertificate = 0;
 	}
 
-	if (_pPeerCertificate)
 	{
-		CertFreeCertificateContext(_pPeerCertificate);
-		_pPeerCertificate = 0;
+		std::lock_guard<std::mutex> guard(_mutexPeerCertificate);
+		if (_pPeerCertificate)
+		{
+			CertFreeCertificateContext(_pPeerCertificate);
+			_pPeerCertificate = 0;
+		}
 	}
 
 	_outSecBuffer.release();
@@ -747,10 +750,13 @@ void SecureSocketImpl::clientConnectVerify()
 	}
 	catch (...)
 	{
-		if (_pPeerCertificate)
 		{
-			CertFreeCertificateContext(_pPeerCertificate);
-			_pPeerCertificate = 0;
+			std::lock_guard<std::mutex> guard(_mutexPeerCertificate);
+			if (_pPeerCertificate)
+			{
+				CertFreeCertificateContext(_pPeerCertificate);
+				_pPeerCertificate = 0;
+			}
 		}
 		throw;
 	}
@@ -1055,10 +1061,13 @@ void SecureSocketImpl::performServerHandshake()
 
 		if (securityStatus != SEC_E_OK)
 		{
-			if (_pPeerCertificate)
 			{
-				CertFreeCertificateContext(_pPeerCertificate);
-				_pPeerCertificate = 0;
+				std::lock_guard<std::mutex> guard(_mutexPeerCertificate);
+				if (_pPeerCertificate)
+				{
+					CertFreeCertificateContext(_pPeerCertificate);
+					_pPeerCertificate = 0;
+				}
 			}
 			throw SSLException("Cannot obtain client certificate", Utility::formatError(securityStatus));
 		}
